@@ -1,0 +1,42 @@
+@tailwind base;
+
+h1 {
+  @apply text-3xl;
+  @apply font-thin;
+}
+
+h2 {
+  @apply text-lg;
+}
+
+h3 {
+  @apply text-sm;
+  @apply uppercase;
+  @apply font-bold;
+}
+
+h4 {
+  @apply text-xs;
+}
+
+@tailwind components;
+
+@tailwind utilities;
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #405cb1;
+}
+
+.map-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.mapboxgl-popup-content {
+  @apply bg-bone;
+  @apply bg-opacity-95;
+}

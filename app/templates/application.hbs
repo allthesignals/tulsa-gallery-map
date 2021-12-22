@@ -1,0 +1,49 @@
+{{page-title "TulsaTrailMap"}}
+
+<div class="absolute top-0 w-full z-10">
+  <Header />
+  <Legend class="absolute right-0 bg-opacity-95 shadow-md" />
+</div>
+
+<MapboxGl
+  @initOptions={{hash hash=true}}
+  @mapLoaded={{this.onLoad}}
+  class='map-container' as |map|
+>
+  <CompositeLayer
+    @map={{map}}
+    @sourceId='existing-trails'
+    as |trails|
+  >
+    <trails.tooltip as |feature|>
+      <h3>{{feature.properties.NAME}}</h3>
+      <span>{{feature.properties.TYPE}}</span>
+    </trails.tooltip>
+
+    <CompositeLayer
+      @map={{map}}
+      @sourceId='closed-trails'
+    />
+
+    <CompositeLayer
+      @map={{map}}
+      @sourceId='undocumented-closed-trails'
+      @layerId='closed-trails'
+    />
+
+    <CompositeLayer
+      @map={{map}}
+      @sourceId='detours'
+    />
+
+    <CompositeLayer
+      @map={{map}}
+      @sourceId='undocumented-detours'
+      @layerId='detours'
+    />
+
+    <trails.source.layer
+      @layer={{get-mapbox-layer 'existing-trails-labels'}}
+    />
+  </CompositeLayer>
+</MapboxGl>
