@@ -1,8 +1,8 @@
 <@map.source
-  @options={{get-mapbox-source @sourceId}} as |source|
+  @options={{@sourceOptions}} as |source|
 >
   <source.layer
-    @layer={{get-mapbox-layer (or @layerId @sourceId)}}
+    @layer={{@layerOptions}}
     as |layer|
   >
     {{yield (hash

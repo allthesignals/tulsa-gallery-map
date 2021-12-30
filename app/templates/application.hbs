@@ -1,8 +1,7 @@
-{{page-title "TulsaTrailMap"}}
+{{page-title "Tulsa Gallery Map"}}
 
 <div class="absolute top-0 w-full z-10">
   <Header />
-  <Legend class="absolute right-0 bg-opacity-95 shadow-md" />
 </div>
 
 <MapboxGl
@@ -10,40 +9,20 @@
   @mapLoaded={{this.onLoad}}
   class='map-container' as |map|
 >
-  <CompositeLayer
-    @map={{map}}
-    @sourceId='existing-trails'
-    as |trails|
-  >
-    <trails.tooltip as |feature|>
-      <h3>{{feature.properties.NAME}}</h3>
-      <span>{{feature.properties.TYPE}}</span>
-    </trails.tooltip>
-
-    <CompositeLayer
-      @map={{map}}
-      @sourceId='closed-trails'
-    />
-
-    <CompositeLayer
-      @map={{map}}
-      @sourceId='undocumented-closed-trails'
-      @layerId='closed-trails'
-    />
-
-    <CompositeLayer
-      @map={{map}}
-      @sourceId='detours'
-    />
-
-    <CompositeLayer
-      @map={{map}}
-      @sourceId='undocumented-detours'
-      @layerId='detours'
-    />
-
-    <trails.source.layer
-      @layer={{get-mapbox-layer 'existing-trails-labels'}}
-    />
-  </CompositeLayer>
+  {{#each this.model as |location|}}
+    <map.marker
+      @lngLat={{array location.Longitude location.Latitude}}
+      as |marker|
+    >
+      {{!-- <img class="goff-pin" src="/images/pin.png"/> --}}
+      Test
+      <marker.popup
+        class="location-popup"
+      >
+        <div class="popup-container">
+          Test
+        </div>
+      </marker.popup>
+    </map.marker>
+  {{/each}}
 </MapboxGl>
